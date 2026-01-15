@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../VideoGameCatalogue.Api.Tests/VideoGameCatalogue.Api.Tests.csproj" Id="9e5bbec5-d25e-4a51-89cb-8603524c3e90" />
+  <Project Path="VideoGameCatalogue.Api.csproj" />
+</Solution>
