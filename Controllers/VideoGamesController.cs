@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,6 +29,18 @@ namespace VideoGameCatalogue.Api.Controllers
         public async Task<ActionResult<IEnumerable<VideoGame>>> GetVideoGames()
         {
             return await _context.VideoGames.ToListAsync();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<VideoGame>>> GetVideoGames(Guid id)
+        {
+            var videogame = await _context.VideoGames.FindAsync(id);
+            if(videogame == null)
+            {
+                return NoContent();
+            }
+            return Ok(videogame);
+
         }
 
         /// <summary>
@@ -77,7 +89,8 @@ namespace VideoGameCatalogue.Api.Controllers
             _context.VideoGames.Add(videoGame);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVideoGame", new { id = videoGame.Id }, videoGame);
+            var game = CreatedAtAction("GetVideoGame", new { id = videoGame.Id }, videoGame);
+            return Ok(game);
         }
 
        /// <summary>
